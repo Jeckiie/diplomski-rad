@@ -12,7 +12,7 @@ const routes: Routes = [
   },
   {
     path: '',
-    redirectTo: 'home',
+    redirectTo: 'home/tabs/currencies',
     pathMatch: 'full'
   },
 ];

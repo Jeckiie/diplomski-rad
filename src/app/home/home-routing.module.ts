@@ -5,8 +5,18 @@ import { HomePage } from './home.page';
 
 const routes: Routes = [
   {
-    path: '',
-    component: HomePage
+    path: 'tabs',
+    component: HomePage,
+    children: [
+      { 
+        path: 'currencies',
+        loadChildren: () => import('./currencies/currencies.module').then( m => m.CurrenciesPageModule)
+      },
+      {
+        path: 'news',
+        loadChildren: () => import('./news/news.module').then( m => m.NewsPageModule)
+      }
+    ]
   }
 ];
 
