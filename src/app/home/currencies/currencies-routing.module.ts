@@ -7,6 +7,10 @@ const routes: Routes = [
   {
     path: '',
     component: CurrenciesPage
+  },
+  {
+    path: ':currencyName',
+    loadChildren: () => import('./currency-detail/currency-detail.module').then( m => m.CurrencyDetailPageModule)
   }
 ];
 
