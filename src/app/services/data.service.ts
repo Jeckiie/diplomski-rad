@@ -17,4 +17,8 @@ export class DataService {
   getSingeSymbolPrice(currency: string) {
     return this.http.get("https://min-api.cryptocompare.com/data/price?fsym=" + currency + "&tsyms=USD&api_key={" + this.api_key + "}");
   }
+
+  getLatestNewsArticles() {
+    return this.http.get("https://min-api.cryptocompare.com/data/v2/news/?lang=EN&api_key={" + this.api_key + "}");
+  }
 }

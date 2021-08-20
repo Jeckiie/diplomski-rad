@@ -5,9 +5,18 @@
 </ion-header>
 
 <ion-content padding>
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title>News</ion-title>
-    </ion-toolbar>
-  </ion-header>
+  <ion-list>
+    <ion-item 
+    *ngFor="let news of loadedNews"
+    (click)="goToLink(news.guid)"
+    detail>
+      <ion-thumbnail slot="start">
+        <ion-img [src]="news.imageurl"></ion-img>
+      </ion-thumbnail>
+      <ion-label style="white-space: normal;">
+        <h2> {{ news.title }} </h2>
+        <p> <b>{{ news.source_info.name }}</b> | {{ timestampToDate(news.published_on) }} </p>
+      </ion-label>
+    </ion-item>
+  </ion-list>
 </ion-content>

@@ -1,13 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { DataService } from 'src/app/services/data.service';
 import {
-  ChartComponent,
   ApexAxisChartSeries,
   ApexChart,
   ApexXAxis,
   ApexTitleSubtitle,
   ApexYAxis,
-  ApexDataLabels
 } from "ng-apexcharts";
 import { ActivatedRoute } from '@angular/router';
 
@@ -49,47 +47,47 @@ export class CurrencyDetailPage implements OnInit {
               name: "candle",
               data: [
                 {
-                  x: new Date(hourlyPair[0].time*1000),
+                  x: new Date((hourlyPair[0].time + 7200)*1000),
                   y: [hourlyPair[0].open, hourlyPair[0].high, hourlyPair[0].low, hourlyPair[0].close]
                 },
                 {
-                  x: new Date(hourlyPair[1].time*1000),
+                  x: new Date((hourlyPair[1].time + 7200)*1000),
                   y: [hourlyPair[1].open, hourlyPair[1].high, hourlyPair[1].low, hourlyPair[1].close]
                 },
                 {
-                  x: new Date(hourlyPair[2].time*1000),
+                  x: new Date((hourlyPair[2].time + 7200)*1000),
                   y: [hourlyPair[2].open, hourlyPair[2].high, hourlyPair[2].low, hourlyPair[2].close]
                 },
                 {
-                  x: new Date(hourlyPair[3].time*1000),
+                  x: new Date((hourlyPair[3].time + 7200)*1000),
                   y: [hourlyPair[3].open, hourlyPair[3].high, hourlyPair[3].low, hourlyPair[3].close]
                 },
                 {
-                  x: new Date(hourlyPair[4].time*1000),
+                  x: new Date((hourlyPair[4].time + 7200)*1000),
                   y: [hourlyPair[4].open, hourlyPair[4].high, hourlyPair[4].low, hourlyPair[4].close]
                 },
                 {
-                  x: new Date(hourlyPair[5].time*1000),
+                  x: new Date((hourlyPair[5].time + 7200)*1000),
                   y: [hourlyPair[5].open, hourlyPair[5].high, hourlyPair[5].low, hourlyPair[5].close]
                 },
                 {
-                  x: new Date(hourlyPair[6].time*1000),
+                  x: new Date((hourlyPair[6].time + 7200)*1000),
                   y: [hourlyPair[6].open, hourlyPair[6].high, hourlyPair[6].low, hourlyPair[6].close]
                 },
                 {
-                  x: new Date(hourlyPair[7].time*1000),
+                  x: new Date((hourlyPair[7].time + 7200)*1000),
                   y: [hourlyPair[7].open, hourlyPair[7].high, hourlyPair[7].low, hourlyPair[7].close]
                 },
                 {
-                  x: new Date(hourlyPair[8].time*1000),
+                  x: new Date((hourlyPair[8].time + 7200)*1000),
                   y: [hourlyPair[8].open, hourlyPair[8].high, hourlyPair[8].low, hourlyPair[8].close]
                 },
                 {
-                  x: new Date(hourlyPair[9].time*1000),
+                  x: new Date((hourlyPair[9].time + 7200)*1000),
                   y: [hourlyPair[9].open, hourlyPair[9].high, hourlyPair[9].low, hourlyPair[9].close]
                 },
                 {
-                  x: new Date(hourlyPair[10].time*1000),
+                  x: new Date((hourlyPair[10].time + 7200)*1000),
                   y: [hourlyPair[10].open, hourlyPair[10].high, hourlyPair[10].low, hourlyPair[10].close]
                 }
               ]
@@ -115,27 +113,6 @@ export class CurrencyDetailPage implements OnInit {
       });
 
       this.chartOptions = {
-        series: [
-          {
-            name: "candle",
-            data: [
-              {
-                x: new Date(),
-                y: []
-              }
-            ]
-          }
-        ],
-        chart: {
-          height: 350,
-          type: "bar"
-        },
-        title: {
-          text: "My First Angular Chart"
-        },
-        xaxis: {
-          categories: ["Jan", "Feb",  "Mar",  "Apr",  "May",  "Jun",  "Jul",  "Aug", "Sep"]
-        }
       };
   }
 

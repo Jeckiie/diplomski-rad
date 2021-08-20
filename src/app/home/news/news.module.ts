@@ -13,8 +13,9 @@ import { NewsPage } from './news.page';
     CommonModule,
     FormsModule,
     IonicModule,
+    
     NewsPageRoutingModule
   ],
-  declarations: [NewsPage]
+  declarations: [NewsPage],
 })
 export class NewsPageModule {}
