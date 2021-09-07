@@ -11,7 +11,7 @@ export class DataService {
   constructor(private http: HttpClient) {}
 
   getHourlyPair(currency: string) {
-    return this.http.get("https://min-api.cryptocompare.com/data/v2/histohour?fsym=" + currency + "&tsym=USD&limit=10&api_key={" + this.api_key + "}");
+    return this.http.get("https://min-api.cryptocompare.com/data/v2/histohour?fsym=" + currency + "&tsym=USD&limit=23&api_key={" + this.api_key + "}");
   }
 
   getSingeSymbolPrice(currency: string) {
@@ -20,5 +20,13 @@ export class DataService {
 
   getLatestNewsArticles() {
     return this.http.get("https://min-api.cryptocompare.com/data/v2/news/?lang=EN&api_key={" + this.api_key + "}");
+  }
+
+  getDailyPairForYear(currency: string) {
+    return this.http.get("https://min-api.cryptocompare.com/data/v2/histoday?fsym=" + currency + "&tsym=USD&limit=365&api_key={" + this.api_key + "}");
+  }
+
+  getDailyPairForHalfYear(currency: string) {
+    return this.http.get("https://min-api.cryptocompare.com/data/v2/histoday?fsym=" + currency + "&tsym=USD&limit=183&api_key={" + this.api_key + "}");
   }
 }

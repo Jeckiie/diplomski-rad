@@ -26,18 +26,20 @@ export class CurrencyDetailPage implements OnInit {
   public chartOptions: Partial<ChartOptions>;
   volume: number;
   cryptos: any;
+  depositMoney: number = 1000;
+  depositToday: number = 0;
+  currencyAbbr: string;
 
   constructor(private dataService: DataService, private route: ActivatedRoute) { 
     
   }
   
   ngOnInit() {
-    let currencyAbbr: string;
     this.route.queryParams
       .subscribe(params => {
-        currencyAbbr = params.abbr;
+        this.currencyAbbr = params.abbr;
       })
-    this.dataService.getHourlyPair(currencyAbbr)
+    this.dataService.getHourlyPair(this.currencyAbbr)
       .subscribe(result => {
         this.cryptos = result;
         let hourlyPair = this.cryptos.Data.Data
@@ -89,6 +91,58 @@ export class CurrencyDetailPage implements OnInit {
                 {
                   x: new Date((hourlyPair[10].time + 7200)*1000),
                   y: [hourlyPair[10].open, hourlyPair[10].high, hourlyPair[10].low, hourlyPair[10].close]
+                },
+                {
+                  x: new Date((hourlyPair[11].time + 7200)*1000),
+                  y: [hourlyPair[11].open, hourlyPair[11].high, hourlyPair[11].low, hourlyPair[11].close]
+                },
+                {
+                  x: new Date((hourlyPair[12].time + 7200)*1000),
+                  y: [hourlyPair[12].open, hourlyPair[12].high, hourlyPair[12].low, hourlyPair[12].close]
+                },
+                {
+                  x: new Date((hourlyPair[13].time + 7200)*1000),
+                  y: [hourlyPair[13].open, hourlyPair[13].high, hourlyPair[13].low, hourlyPair[13].close]
+                },
+                {
+                  x: new Date((hourlyPair[14].time + 7200)*1000),
+                  y: [hourlyPair[14].open, hourlyPair[14].high, hourlyPair[14].low, hourlyPair[14].close]
+                },
+                {
+                  x: new Date((hourlyPair[15].time + 7200)*1000),
+                  y: [hourlyPair[15].open, hourlyPair[15].high, hourlyPair[15].low, hourlyPair[15].close]
+                },
+                {
+                  x: new Date((hourlyPair[16].time + 7200)*1000),
+                  y: [hourlyPair[16].open, hourlyPair[16].high, hourlyPair[16].low, hourlyPair[16].close]
+                },
+                {
+                  x: new Date((hourlyPair[17].time + 7200)*1000),
+                  y: [hourlyPair[17].open, hourlyPair[17].high, hourlyPair[17].low, hourlyPair[17].close]
+                },
+                {
+                  x: new Date((hourlyPair[18].time + 7200)*1000),
+                  y: [hourlyPair[18].open, hourlyPair[18].high, hourlyPair[18].low, hourlyPair[18].close]
+                },
+                {
+                  x: new Date((hourlyPair[19].time + 7200)*1000),
+                  y: [hourlyPair[19].open, hourlyPair[19].high, hourlyPair[19].low, hourlyPair[19].close]
+                },
+                {
+                  x: new Date((hourlyPair[20].time + 7200)*1000),
+                  y: [hourlyPair[20].open, hourlyPair[20].high, hourlyPair[20].low, hourlyPair[20].close]
+                },
+                {
+                  x: new Date((hourlyPair[21].time + 7200)*1000),
+                  y: [hourlyPair[21].open, hourlyPair[21].high, hourlyPair[21].low, hourlyPair[21].close]
+                },
+                {
+                  x: new Date((hourlyPair[22].time + 7200)*1000),
+                  y: [hourlyPair[22].open, hourlyPair[22].high, hourlyPair[22].low, hourlyPair[22].close]
+                },
+                {
+                  x: new Date((hourlyPair[23].time + 7200)*1000),
+                  y: [hourlyPair[23].open, hourlyPair[23].high, hourlyPair[23].low, hourlyPair[23].close]
                 }
               ]
             }
@@ -98,7 +152,7 @@ export class CurrencyDetailPage implements OnInit {
             type: "candlestick"
           },
           title: {
-            text: "" + currencyAbbr + " chart",
+            text: "" + this.currencyAbbr + " chart",
             align: "left"
           },
           xaxis: {
@@ -114,6 +168,46 @@ export class CurrencyDetailPage implements OnInit {
 
       this.chartOptions = {
       };
+
+      this.dataService.getDailyPairForYear(this.currencyAbbr)
+      .subscribe(result => {
+        this.cryptos = result;
+        let dailyPair = this.cryptos.Data.Data;
+        
+        let yearAgoValue = dailyPair[0];
+        let currencyAmount = this.depositMoney / yearAgoValue.close;
+        let todayValue = dailyPair[364];
+        this.depositToday = todayValue.close * currencyAmount;
+        this.depositToday = Math.round(this.depositToday * 1e4) / 1e4;
+      });
+  }
+
+  radioGroupChange(event: any) {
+    if (event.detail.value == 'halfYear') {
+      this.dataService.getDailyPairForHalfYear(this.currencyAbbr)
+      .subscribe(result => {
+        this.cryptos = result;
+        let dailyPair = this.cryptos.Data.Data;
+
+        let halfYearAgoValue = dailyPair[0];
+        let currencyAmount = this.depositMoney / halfYearAgoValue.close;
+        let todayValue = dailyPair[182];
+        this.depositToday = todayValue.close * currencyAmount;
+        this.depositToday = Math.round(this.depositToday * 1e4) / 1e4;
+      })
+    } else if (event.detail.value == 'year') {
+      this.dataService.getDailyPairForYear(this.currencyAbbr)
+      .subscribe(result => {
+        this.cryptos = result;
+        let dailyPair = this.cryptos.Data.Data;
+        
+        let yearAgoValue = dailyPair[0];
+        let currencyAmount = this.depositMoney / yearAgoValue.close;
+        let todayValue = dailyPair[364];
+        this.depositToday = todayValue.close * currencyAmount;
+        this.depositToday = Math.round(this.depositToday * 1e4) / 1e4;
+      });
+    }
   }
 
 }

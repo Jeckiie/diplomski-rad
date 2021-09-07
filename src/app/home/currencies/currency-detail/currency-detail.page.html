@@ -8,7 +8,6 @@
 </ion-header>
 
 <ion-content padding>
-  <ion-label>Volume: $ {{ volume }}</ion-label>
   <div style="text-align: center">
     <apx-chart
       [series]="chartOptions.series"
@@ -17,5 +16,26 @@
       [yaxis]="chartOptions.yaxis"
       [title]="chartOptions.title"
     ></apx-chart>
+  </div>
+  <div style="text-align: center;">
+    <ion-text color="primary">
+      If you put a deposit of <b>1000$</b> into <b>{{ currencyAbbr }}</b> a: 
+    </ion-text>
+    <ion-list style="justify-content: center;display: flex;align-items: center;">
+      <ion-radio-group value="year" (ionChange)="radioGroupChange($event)">
+        <ion-item>
+          <ion-label>Year ago</ion-label>
+          <ion-radio slot="start" value="year"></ion-radio>
+        </ion-item>
+
+        <ion-item>
+          <ion-label>Half a year ago</ion-label>
+          <ion-radio slot="start" value="halfYear"></ion-radio>
+        </ion-item>
+      </ion-radio-group>
+    </ion-list>
+    <ion-text color="primary">
+      you would have: <b>{{ depositToday }}$</b> today.
+    </ion-text>
   </div>
 </ion-content>
